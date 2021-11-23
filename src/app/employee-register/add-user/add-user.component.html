@@ -1,0 +1,69 @@
+<mat-card style="background-color: #75c9b7">
+  <mat-card-title>Create New Employee</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="addUserForm" (submit)="createUser()">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" formControlName="username" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email Address" formControlName="email" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error
+            *ngIf="
+              addUserForm.controls['email'].errors &&
+              addUserForm.controls['email'].hasError('required')
+            "
+          >
+            Email Address is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              addUserForm.controls['email'].errors &&
+              addUserForm.controls['email'].hasError('email')
+            "
+          >
+            Email Address is not valid
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput placeholder="Phone Number" formControlName="phone" />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error
+            *ngIf="
+              addUserForm.controls['phone'].errors &&
+              addUserForm.controls['phone'].hasError('required')
+            "
+          >
+            Phone number is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              addUserForm.controls['phone'].errors &&
+              addUserForm.controls['phone'].hasError('maxlength')
+            "
+          >
+            Phone number should be 10 digits
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!addUserForm.valid"
+        >
+          Create User
+        </button>
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>
